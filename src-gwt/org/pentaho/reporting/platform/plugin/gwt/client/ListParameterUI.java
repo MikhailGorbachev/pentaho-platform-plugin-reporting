@@ -22,6 +22,7 @@ import java.util.List;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SimplePanel;
 
@@ -38,11 +39,14 @@ public class ListParameterUI extends SimplePanel implements ParameterUI {
     public void onChange( final ChangeEvent event ) {
       final ListBox listBox = (ListBox) event.getSource();
       final ArrayList<String> selectedItems = new ArrayList<String>();
+      Window.alert( "This is test" );
       for ( int i = 0; i < listBox.getItemCount(); i++ ) {
         if ( listBox.isItemSelected( i ) ) {
           selectedItems.add( values.get( i ) );
         }
       }
+
+      Window.alert( "Selected values = " + selectedItems.toArray( new String[selectedItems.size()] ) );
       controller.getParameterMap().setSelectedValues( parameterName,
           selectedItems.toArray( new String[selectedItems.size()] ) );
       controller.fetchParameters( ParameterControllerPanel.ParameterSubmitMode.USERINPUT );
@@ -72,6 +76,7 @@ public class ListParameterUI extends SimplePanel implements ParameterUI {
       final ParameterSelection choiceElement = choices.get( i );
       final String choiceLabel = choiceElement.getLabel(); //$NON-NLS-1$
       final String choiceValue = choiceElement.getValue(); //$NON-NLS-1$
+      Window.alert( "Choice label = " + choiceLabel );
       listBox.addItem( choiceLabel, String.valueOf( i ) );
       values.add( choiceValue );
       final boolean selected = choiceElement.isSelected();
